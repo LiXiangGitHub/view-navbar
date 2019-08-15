@@ -1,26 +1,26 @@
-# app2
+# navbar-view 
 
-## Project setup
+## 项目安装
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 编译和热重载用于开发
 ```
-npm run serve
+npm run dev
 ```
 
-### Compiles and minifies for production
+### 编译和压缩用于生产
 ```
 npm run build
 ```
 
-### Run your tests
+### 运行测试
 ```
 npm run test
 ```
 
-### Lints and fixes files
+### Lints和修复文件
 ```
 npm run lint
 ```
