@@ -121,32 +121,9 @@ export default [
                 path: 'customer',
                 name: 'customer',
                 meta: {
-                    access: ['super_admin'],
                     icon: 'md-funnel',
-                    showAlways: true,
                     title: '客户管理'
                 },
-                component: parentView,
-                children: [
-                    {
-                        path: 'potential',
-                        name: 'potential',
-                        meta: {
-                            icon: 'md-funnel',
-                            title: '潜客管理'
-                        },
-                        // component: () => import('@/view/multilevel/level-2-2/level-2-2-1.vue')
-                    },
-                    {
-                        path: 'vip',
-                        name: 'vip',
-                        meta: {
-                            icon: 'md-funnel',
-                            title: '尊享客户'
-                        },
-                        // component: () => import('@/view/multilevel/level-2-2/level-2-2-2.vue')
-                    }
-                ]
             }
         ]
     },
@@ -165,13 +142,5 @@ export default [
             hideInMenu: true
         },
         component: () => import('@/view/error-page/500.vue')
-    },
-    // {
-    //     path: '*',
-    //     name: 'error_404',
-    //     meta: {
-    //         hideInMenu: true
-    //     },
-    //     component: () => import('@/view/error-page/404.vue')
-    // }
+    }
 ]
