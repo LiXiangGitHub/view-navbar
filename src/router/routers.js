@@ -1,6 +1,4 @@
 import Main from '@/components/main'
-import parentView from '@/components/parent-view'
-
 /**
  * iview-admin中meta除了原生参数外可配置的参数:
  * meta: {
@@ -142,5 +140,13 @@ export default [
             hideInMenu: true
         },
         component: () => import('@/view/error-page/500.vue')
+    },
+    {
+        path: '*',
+        name: 'error_404',
+        meta: {
+            hideInMenu: true
+        },
+        component: () => import('@/view/error-page/404.vue')
     }
 ]
