@@ -1,5 +1,6 @@
 import Router from 'vue-router'
 import routes from './routers'
+import { routers } from './routers';
 import store from '@/store'
 import iView from 'iview'
 import { setToken, getToken, canTurnTo, setTitle } from '@/libs/util'
@@ -12,7 +13,7 @@ const { homeName } = config
 const LOGIN_PAGE_NAME = 'login'
 
 const router = new Router({
-    routes,
+    routes:routers,
     base: process.env.BASE_URL,
     mode: 'history'
 })
@@ -24,8 +25,10 @@ const router = new Router({
  * @param next
  */
 const turnTo = (to, access, next) => {
-  if (canTurnTo(to.name, access, routes)) next() // 有权限，可访问
-  else next({ replace: true, name: 'error_401' }) // 无权限，重定向到401页面
+  if (canTurnTo(to.name, access, routers))
+      next() // 有权限，可访问
+  else
+      next({ replace: true, name: 'error_401' }) // 无权限，重定向到401页面
 }
 /**
  * 路由前处理

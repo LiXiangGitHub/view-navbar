@@ -15,59 +15,80 @@ import Main from '@/components/main'
  * }
  */
 
-export default [
-    {
-        path: '/login',
-        name: 'login',
+// 不作为Main组件的子页面展示的页面单独写，如下
+export const loginRouter =     {
+    path: '/login',
+    name: 'login',
+    meta: {
+        title: 'Login - 登录',
+        hideInMenu: true
+    },
+    component: () => import('@/view/login/login.vue')
+};
+
+// 作为Main组件的子页面展示但是不在左侧菜单显示的路由写在otherRouter里
+export const otherRouter = {
+    path: '/',
+    name: 'otherRouter',
+    redirect: '/home',
+    component: Main,
+    meta: {
+        hideInMenu: true,
+        notCache: true
+    },
+    children: [
+        {
+            path: '/home',
+            name: 'home',
+            meta: {
+                hideInMenu: true,
+                title: '首页',
+                notCache: true,
+                icon: 'md-home'
+            },
+            component: () => import('@/view/single-page/home')
+        },
+        {
+            path: 'message_page',
+            name: 'message_page',
+            meta: {
+                icon: 'md-notifications',
+                title: '消息中心'
+            },
+            component: () => import('@/view/single-page/message/index.vue')
+        }
+    ]
+};
+
+export const page500 =     {
+    path: '/500',
+    name: 'error_500',
+    meta: {
+        hideInMenu: true
+    },
+    component: () => import('@/view/error-page/500.vue')
+};
+
+export const page401 =     {
+    path: '/401',
+    name: 'error_401',
+    meta: {
+        hideInMenu: true
+    },
+    component: () => import('@/view/error-page/401.vue')
+};
+
+export const page404 =     {
+        path: '*',
+        name: 'error_404',
         meta: {
-            title: 'Login - 登录',
             hideInMenu: true
         },
-        component: () => import('@/view/login/login.vue')
-    },
-    {
-        path: '/',
-        name: '_home',
-        redirect: '/home',
-        component: Main,
-        meta: {
-            hideInMenu: true,
-            notCache: true
-        },
-        children: [
-            {
-                path: '/home',
-                name: 'home',
-                meta: {
-                    hideInMenu: true,
-                    title: '首页',
-                    notCache: true,
-                    icon: 'md-home'
-                },
-                component: () => import('@/view/single-page/home')
-            }
-        ]
-    },
-    {
-        path: '/message',
-        name: 'message',
-        component: Main,
-        meta: {
-            hideInBread: true,
-            hideInMenu: true
-        },
-        children: [
-            {
-                path: 'message_page',
-                name: 'message_page',
-                meta: {
-                    icon: 'md-notifications',
-                    title: '消息中心'
-                },
-                component: () => import('@/view/single-page/message/index.vue')
-            }
-        ]
-    },
+        component: () => import('@/view/error-page/404.vue')
+    };
+
+//动态添加路由信息
+export const appRouter = [
     {
         path: '/rps-view',
         name: 'rps',
@@ -124,29 +145,15 @@ export default [
                 },
             }
         ]
-    },
-    {
-        path: '/401',
-        name: 'error_401',
-        meta: {
-            hideInMenu: true
-        },
-        component: () => import('@/view/error-page/401.vue')
-    },
-    {
-        path: '/500',
-        name: 'error_500',
-        meta: {
-            hideInMenu: true
-        },
-        component: () => import('@/view/error-page/500.vue')
-    },
-    {
-        path: '*',
-        name: 'error_404',
-        meta: {
-            hideInMenu: true
-        },
-        component: () => import('@/view/error-page/404.vue')
     }
-]
+];
+
+// 所有上面定义的路由都要写在下面的routers里
+export const routers = [
+    loginRouter,
+    otherRouter,
+    ...appRouter,
+    page500,
+    page401,
+    page404
+];
