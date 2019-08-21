@@ -90,33 +90,64 @@ export const page404 =     {
 //动态添加路由信息
 export const appRouter = [
     {
-        path: '/rps-view',
-        name: 'rps',
+        path: '/tms-view',
+        name: 'tms',
         meta: {
             icon: 'md-menu',
-            title: '报表管理系统'
+            title: '运输管理系统'
         },
         component: Main,
-        children: [
-            {
-                path: 'table',
-                name: 'table',
-                meta: {
-                    icon: 'md-funnel',
-                    title: '表格管理'
-                },
-                // component: () => import('@/view/multilevel/level-2-1.vue')
-            },
-            {
-                path: 'other',
-                name: 'other',
-                meta: {
-                    icon: 'md-funnel',
-                    title: '其他管理'
-                },
-                // component: () => import('@/view/multilevel/level-2-3.vue')
-            }
-        ]
+        children: []
+    },
+    {
+        path: '/bms-view',
+        name: 'bms',
+        meta: {
+            icon: 'md-menu',
+            title: '财务管理系统'
+        },
+        component: Main,
+        children: []
+    },
+    {
+        path: '/qms-view',
+        name: 'qms',
+        meta: {
+            icon: 'md-menu',
+            title: '质量管理系统'
+        },
+        component: Main,
+        children: []
+    },
+    {
+        path: '/tcp-view',
+        name: 'tcp',
+        meta: {
+            icon: 'md-menu',
+            title: '运力管理系统'
+        },
+        component: Main,
+        children: []
+    },
+    {
+        path: '/pay-view',
+        name: 'pay',
+        meta: {
+            icon: 'md-menu',
+            title: '支付管理系统'
+        },
+        component: Main,
+        children: []
+    },
+    {
+        path: '/mpp-view',
+        name: 'mpp',
+        meta: {
+            icon: 'md-menu',
+            title: '定价管理系统'
+        },
+        component: Main,
+        children: []
     },
     {
         path: '/crm-view',
@@ -143,6 +174,35 @@ export const appRouter = [
                     icon: 'md-funnel',
                     title: '客户管理'
                 },
+            }
+        ]
+    },
+    {
+        path: '/rps-view',
+        name: 'rps',
+        meta: {
+            icon: 'md-menu',
+            title: '报表管理系统',
+        },
+        component: Main,
+        children: [
+            {
+                path: 'table',
+                name: 'table',
+                meta: {
+                    icon: 'md-funnel',
+                    title: '表格管理'
+                },
+                // component: () => import('@/view/multilevel/level-2-1.vue')
+            },
+            {
+                path: 'other',
+                name: 'other',
+                meta: {
+                    icon: 'md-funnel',
+                    title: '其他管理'
+                },
+                // component: () => import('@/view/multilevel/level-2-3.vue')
             }
         ]
     }

@@ -16,7 +16,6 @@ const router = new Router({
     base: process.env.BASE_URL,
     mode: 'history'
 })
-
 /**
  * 鉴权
  * @param to
