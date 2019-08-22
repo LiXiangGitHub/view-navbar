@@ -9,7 +9,7 @@ import {
   restoreTrash,
   getUnreadCount
 } from '@/api/user'
-import { setToken, getToken } from '@/libs/util'
+import { setToken, getToken,setUserId } from '@/libs/util'
 
 export default {
   state: {
@@ -31,6 +31,7 @@ export default {
     },
     setUserId (state, id) {
       state.userId = id
+      setUserId(id)
     },
     setUserName (state, name) {
       state.userName = name
@@ -74,16 +75,17 @@ export default {
   },
   actions: {
     // 登录
-    handleLogin ({ commit }, { userName, password }) {
+    handleLogin ({ commit }, { userName, password,captchaCode }) {
       userName = userName.trim()
       return new Promise((resolve, reject) => {
         login({
           userName,
-          password
+          password,
+          captchaCode
         }).then(res => {
           const data = res.data
-          commit('setToken', data.token)
-          resolve()
+          commit('setToken', data.access_token)
+          resolve(res)
         }).catch(err => {
           reject(err)
         })
@@ -106,17 +108,19 @@ export default {
       })
     },
     // 获取用户相关信息
-    getUserInfo ({ state, commit }) {
+    getUserInfo ({ state, commit },data) {
       return new Promise((resolve, reject) => {
         try {
-          getUserInfo(state.token).then(res => {
+          getUserInfo(data).then(res => {
             const data = res.data
-            commit('setAvator', data.avator)
-            commit('setUserName', data.name)
-            commit('setUserId', data.user_id)
-            commit('setAccess', data.access)
+            const info=data.data[0]
+            info.access=[info.userCode]
+            commit('setAvator', info.userHead)
+            commit('setUserName', info.userName)
+            commit('setUserId', info.userCode)
+            commit('setAccess', info.access)
             commit('setHasGetInfo', true)
-            resolve(data)
+            resolve(info)
           }).catch(err => {
             reject(err)
           })
