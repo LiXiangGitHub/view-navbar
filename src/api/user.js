@@ -1,8 +1,9 @@
 import axios from '@/libs/api.request'
+import {getToken} from '@/libs/util'
 
 export const login = ({userName, password, captchaCode}) => {
 
-    const data = 'grant_type=password&username='+userName+'&password='+password+'&captchaCode='+captchaCode;
+    const data = 'grant_type=password&username=' + userName + '&password=' + password + '&captchaCode=' + captchaCode;
 
     return axios.request({
         url: '/oauth/token',
@@ -19,6 +20,14 @@ export const trans = (data) => {
     })
 }
 
+export const queryMenu = (data) => {
+    return axios.request({
+        url: '/user/menu/query',
+        data,
+        method: 'post'
+    })
+}
+
 export const getUserInfo = (data) => {
     return axios.request({
         url: '/user/query',
@@ -28,9 +37,10 @@ export const getUserInfo = (data) => {
 }
 
 export const logout = (token) => {
+    var data = 'access_token=' + getToken();
     return axios.request({
-        url: 'logout',
-        method: 'post'
+        url: '/oauth/token?' + data,
+        method: 'delete'
     })
 }
 

@@ -10,7 +10,7 @@ import {
   getUnreadCount
 } from '@/api/user'
 import { setToken, getToken,setUserId } from '@/libs/util'
-
+import vue from 'vue'
 export default {
   state: {
     userName: '',
@@ -115,7 +115,11 @@ export default {
             const data = res.data
             const info=data.data[0]
             info.access=[info.userCode]
-            commit('setAvator', info.userHead)
+            console.log(vue)
+            let host=vue.prototype.$fmsHost;
+            let vaurl = `/fsm/api/fsm_api/preview.do?file_app_id=${info.userHead.split("_")[0]}&file_serial_no=${info.userHead}`;
+            let headUrl = host + vaurl;
+            commit('setAvator', headUrl)
             commit('setUserName', info.userName)
             commit('setUserId', info.userCode)
             commit('setAccess', info.access)

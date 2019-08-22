@@ -32,6 +32,13 @@ Vue.prototype.$captchaUrl =  process.env.NODE_ENV === 'development'
         ? 'http://mps-ht.chunghwa56.com/portal/user/captcha/create'
         : 'http://192.168.1.251:8150/portal/user/captcha/create';
 
+//文件服务器ip地址
+Vue.prototype.$fmsHost= process.env.NODE_ENV === 'development'
+    ? 'http://192.168.1.236:8088'
+    :env === 'production'
+        ? 'http://10.0.0.56:8088'
+        : 'http://192.168.1.236:8088';
+
 /**
  * @description Single-SPA 应用注册
  */

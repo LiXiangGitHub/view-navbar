@@ -8,7 +8,7 @@
             </Input>
         </FormItem>
         <FormItem prop="password">
-            <Input type="password" @input="transPassword" v-model="form.encodePassword" placeholder="请输入密码">
+            <Input type="password" v-model="form.encodePassword" placeholder="请输入密码">
         <span slot="prepend">
           <Icon :size="14" type="md-lock"></Icon>
         </span>
@@ -86,13 +86,12 @@
             handleSubmit() {
                 this.$refs.loginForm.validate((valid) => {
                     if (valid) {
+                      trans(this.form).then(res => {
+                        this.form.password = res.data.data
                         this.$emit('on-success-valid', this.form)
+                      })
+
                     }
-                })
-            },
-            transPassword() {
-                trans(this.form).then(res => {
-                    this.form.password = res.data.data
                 })
             },
             changeCaptcha() {

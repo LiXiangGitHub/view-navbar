@@ -1,4 +1,5 @@
 import Main from '@/components/main'
+
 /**
  * iview-admin中meta除了原生参数外可配置的参数:
  * meta: {
@@ -16,7 +17,7 @@ import Main from '@/components/main'
  */
 
 // 不作为Main组件的子页面展示的页面单独写，如下
-export const loginRouter =     {
+export const loginRouter = {
     path: '/login',
     name: 'login',
     meta: {
@@ -60,7 +61,7 @@ export const otherRouter = {
     ]
 };
 
-export const page500 =     {
+export const page500 = {
     path: '/500',
     name: 'error_500',
     meta: {
@@ -69,7 +70,7 @@ export const page500 =     {
     component: () => import('@/view/error-page/500.vue')
 };
 
-export const page401 =     {
+export const page401 = {
     path: '/401',
     name: 'error_401',
     meta: {
@@ -78,17 +79,17 @@ export const page401 =     {
     component: () => import('@/view/error-page/401.vue')
 };
 
-export const page404 =     {
-        path: '*',
-        name: 'error_404',
-        meta: {
-            hideInMenu: true
-        },
-        component: () => import('@/view/error-page/404.vue')
-    };
+export const page404 = {
+    path: '*',
+    name: 'error_404',
+    meta: {
+        hideInMenu: true
+    },
+    component: () => import('@/view/error-page/404.vue')
+};
 
 //动态添加路由信息
-export const appRouter = [
+export let appRouter = [
     {
         path: '/tms-view',
         name: 'tms',
@@ -158,7 +159,7 @@ export const appRouter = [
         },
         component: Main,
         children: [
-            {
+            /*{
                 path: 'base',
                 name: 'base',
                 meta: {
@@ -174,7 +175,7 @@ export const appRouter = [
                     icon: 'md-funnel',
                     title: '客户管理'
                 },
-            }
+            }*/
         ]
     },
     {
@@ -184,30 +185,40 @@ export const appRouter = [
             icon: 'md-menu',
             title: '报表管理系统',
         },
-        component: Main,
-        children: [
-            {
-                path: 'table',
-                name: 'table',
-                meta: {
-                    icon: 'md-funnel',
-                    title: '表格管理'
-                },
-                // component: () => import('@/view/multilevel/level-2-1.vue')
-            },
-            {
-                path: 'other',
-                name: 'other',
-                meta: {
-                    icon: 'md-funnel',
-                    title: '其他管理'
-                },
-                // component: () => import('@/view/multilevel/level-2-3.vue')
-            }
-        ]
+        component: Main
+        /*  children: [
+              {
+                  path: 'table',
+                  name: 'table',
+                  meta: {
+                      icon: 'md-funnel',
+                      title: '表格管理'
+                  },
+                  // component: () => import('@/view/multilevel/level-2-1.vue')
+              },
+              {
+                  path: 'other',
+                  name: 'other',
+                  meta: {
+                      icon: 'md-funnel',
+                      title: '其他管理'
+                  },
+                  // component: () => import('@/view/multilevel/level-2-3.vue')
+              }
+          ]*/
     }
 ];
 
+let converMenus = sessionStorage.getItem('navbar-routers')
+if (converMenus != null && converMenus != '') {
+    converMenus = JSON.parse(converMenus);
+    let addRouters = []
+    appRouter = appRouter.map(item => {
+        item.children = converMenus.filter(m => item.name === m.sysCode)
+        return item;
+    }).filter(item => item.children!=null && item.children.length>0)
+
+}
 // 所有上面定义的路由都要写在下面的routers里
 export const routers = [
     loginRouter,
