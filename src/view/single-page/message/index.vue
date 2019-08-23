@@ -135,6 +135,9 @@ export default {
 </script>
 
 <style lang="less">
+  .message-list-con{
+    overflow: auto;
+  }
 .message-page{
   &-con{
     height: ~"calc(100vh - 176px)";

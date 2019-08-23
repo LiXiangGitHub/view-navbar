@@ -1,5 +1,5 @@
 import axios from '@/libs/api.request'
-import {getToken} from '@/libs/util'
+import {getToken, getUserId} from '@/libs/util'
 
 export const login = ({userName, password, captchaCode}) => {
 
@@ -46,21 +46,28 @@ export const logout = (token) => {
 
 export const getUnreadCount = () => {
     return axios.request({
-        url: 'message/count',
-        method: 'get'
+        url: 'standing/selectCountStatus',
+        method: 'get',
+        params: {
+            uid: getUserId(),
+            type: 'unread'
+        }
     })
 }
 
 export const getMessage = () => {
     return axios.request({
-        url: 'message/init',
-        method: 'get'
+        url: 'standing/message/init',
+        method: 'get',
+        params: {
+            uid: getUserId()
+        }
     })
 }
 
 export const getContentByMsgId = msg_id => {
     return axios.request({
-        url: 'message/content',
+        url: 'standing/message/content',
         method: 'get',
         params: {
             msg_id
@@ -70,30 +77,35 @@ export const getContentByMsgId = msg_id => {
 
 export const hasRead = msg_id => {
     return axios.request({
-        url: 'message/has_read',
+        url: 'standing/read',
         method: 'post',
         data: {
-            msg_id
+            standingMessageSerialNo: msg_id,
+            uid: getUserId()
         }
     })
 }
 
 export const removeReaded = msg_id => {
     return axios.request({
-        url: 'message/remove_readed',
+        url: 'standing/deleteOrReduct',
         method: 'post',
         data: {
-            msg_id
+            standingMessageSerialNo: msg_id,
+            uid: getUserId(),
+            isDelete: 'Y'
         }
     })
 }
 
 export const restoreTrash = msg_id => {
     return axios.request({
-        url: 'message/restore',
+        url: 'standing/deleteOrReduct',
         method: 'post',
         data: {
-            msg_id
+            standingMessageSerialNo: msg_id,
+            uid: getUserId(),
+            isDelete: 'N'
         }
     })
 }

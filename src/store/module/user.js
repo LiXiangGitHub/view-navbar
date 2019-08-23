@@ -115,7 +115,6 @@ export default {
             const data = res.data
             const info=data.data[0]
             info.access=[info.userCode]
-            console.log(vue)
             let host=vue.prototype.$fmsHost;
             let vaurl = `/fsm/api/fsm_api/preview.do?file_app_id=${info.userHead.split("_")[0]}&file_serial_no=${info.userHead}`;
             let headUrl = host + vaurl;
@@ -136,7 +135,7 @@ export default {
     // 此方法用来获取未读消息条数，接口只返回数值，不返回消息列表
     getUnreadMessageCount ({ state, commit }) {
       getUnreadCount().then(res => {
-        const { data } = res
+        const data  = res.data.data.unreadCount
         commit('setMessageCount', data)
       })
     },
@@ -144,7 +143,7 @@ export default {
     getMessageList ({ state, commit }) {
       return new Promise((resolve, reject) => {
         getMessage().then(res => {
-          const { unread, readed, trash } = res.data
+          const { unread, readed, trash } = res.data.data
           commit('setMessageUnreadList', unread.sort((a, b) => new Date(b.create_time) - new Date(a.create_time)))
           commit('setMessageReadedList', readed.map(_ => {
             _.loading = false
@@ -168,7 +167,7 @@ export default {
           resolve(contentItem)
         } else {
           getContentByMsgId(msg_id).then(res => {
-            const content = res.data
+            const content = res.data.data
             commit('updateMessageContentStore', { msg_id, content })
             resolve(content)
           })
