@@ -22,6 +22,7 @@
     import {appRouter} from '@/router/routers';
     import router from '@/router';
     import {mapActions} from 'vuex'
+    import {routers} from '@/router/routers'
 
     /**
      * 构建树形数据
@@ -93,33 +94,35 @@
             ]),
             handleSubmit({userName, password, captchaCode}) {
                 this.handleLogin({userName, password, captchaCode}).then(res => {
-
                     if (res.data.access_token != '') {
-                        // 获取用户基本信息
-                        this.getUserInfo({
-                            userCode: userName
+                        // 加载菜单
+                        queryMenu({
+                            userCode: userName,
+                            sysCode: process.env.VUE_APP_SYSCODES
                         }).then(res => {
-                            // 加载菜单
-                            queryMenu({
-                                userCode: userName,
-                                sysCode: process.env.VUE_APP_SYSCODES
+                            let menus = res.data.data.menus
+                            let converMenus = convert(menus == null ? [] : menus)
+                            let addRouters = []
+                            appRouter.forEach(item => {
+                                item.children = converMenus.filter(m => item.name === m.sysCode)
+                                if (item.children != null && item.children.length > 0)
+                                    addRouters.push(item)
+                            })
+                            sessionStorage.setItem("navbar-routers", JSON.stringify(converMenus))
+                            router.addRoutes(addRouters)
+                            routers.push(...addRouters)
+                            // 获取用户基本信息
+                            this.getUserInfo({
+                                userCode: userName
                             }).then(res => {
-                                let menus = res.data.data.menus
-                                let converMenus = convert(menus == null ? [] : menus)
-                                let addRouters = []
-                                appRouter.forEach(item => {
-                                    item.children = converMenus.filter(m => item.name === m.sysCode)
-                                    if (item.children != null && item.children.length>0)
-                                        addRouters.push(item)
-                                })
-                                sessionStorage.setItem("navbar-routers", JSON.stringify(converMenus))
-                                router.addRoutes(addRouters)
                                 this.$router.push({
                                     name: this.$config.homeName
                                 })
                             })
 
                         })
+
+
                     } else {
                         const msg = Message.error({
                             content: '用户名和密码错误！',

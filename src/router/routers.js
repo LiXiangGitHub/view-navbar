@@ -89,9 +89,9 @@ export const page404 = {
 };
 
 //动态添加路由信息
-export let appRouter = [
+export const appRouter = [
     {
-        path: '/tms-view',
+        path: '/view-tms',
         name: 'tms',
         meta: {
             icon: 'md-menu',
@@ -101,7 +101,7 @@ export let appRouter = [
         children: []
     },
     {
-        path: '/bms-view',
+        path: '/view-bms',
         name: 'bms',
         meta: {
             icon: 'md-menu',
@@ -111,7 +111,7 @@ export let appRouter = [
         children: []
     },
     {
-        path: '/qms-view',
+        path: '/view-qms',
         name: 'qms',
         meta: {
             icon: 'md-menu',
@@ -121,7 +121,7 @@ export let appRouter = [
         children: []
     },
     {
-        path: '/tcp-view',
+        path: '/view-tcp',
         name: 'tcp',
         meta: {
             icon: 'md-menu',
@@ -131,7 +131,7 @@ export let appRouter = [
         children: []
     },
     {
-        path: '/pay-view',
+        path: '/view-pay',
         name: 'pay',
         meta: {
             icon: 'md-menu',
@@ -141,7 +141,7 @@ export let appRouter = [
         children: []
     },
     {
-        path: '/mpp-view',
+        path: '/view-mpp',
         name: 'mpp',
         meta: {
             icon: 'md-menu',
@@ -151,7 +151,7 @@ export let appRouter = [
         children: []
     },
     {
-        path: '/crm-view',
+        path: '/view-crm',
         name: 'crm',
         meta: {
             icon: 'md-menu',
@@ -179,7 +179,7 @@ export let appRouter = [
         ]
     },
     {
-        path: '/rps-view',
+        path: '/view-rps',
         name: 'rps',
         meta: {
             icon: 'md-menu',
@@ -210,20 +210,22 @@ export let appRouter = [
 ];
 
 let converMenus = sessionStorage.getItem('navbar-routers')
+let addRouters = []
 if (converMenus != null && converMenus != '') {
     converMenus = JSON.parse(converMenus);
-    let addRouters = []
-    appRouter = appRouter.map(item => {
+    appRouter.forEach(item => {
         item.children = converMenus.filter(m => item.name === m.sysCode)
+        if (item.children != null && item.children.length>0)
+            addRouters.push(item)
         return item;
-    }).filter(item => item.children!=null && item.children.length>0)
+    })
 
 }
 // 所有上面定义的路由都要写在下面的routers里
 export const routers = [
     loginRouter,
     otherRouter,
-    ...appRouter,
+    ...addRouters,
     page500,
     page401,
     page404
