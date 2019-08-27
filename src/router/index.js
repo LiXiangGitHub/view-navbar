@@ -1,5 +1,5 @@
 import Router from 'vue-router'
-import {appRouter,addRouters, routers} from './routers';
+import {appRouter, routers} from './routers';
 import store from '@/store'
 import iView from 'iview'
 import {setToken, getToken, canTurnTo, setTitle, getUserId} from '@/libs/util'
