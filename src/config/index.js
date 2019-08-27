@@ -17,7 +17,7 @@ export default {
    * @description api请求基础路径
    */
   baseUrl: {
-    dev: 'http://localhost:8100/portal', 
+    dev: 'http://localhost:8100/portal',
     pro: 'http://mps-ht.chunghwa56.com/portal',
     test: 'http://192.168.1.251:8150/portal'
   },
