@@ -28,19 +28,22 @@
         },
         methods: {
             handleCollpasedChange(state) {
-                getAllSys()
-                    .filter(item => item !== 'view-navbar')
-                    .forEach(node => {
-                        let sysDiv = document.getElementById(node)
-                        if (sysDiv != null) {
-                            let parentDiv = sysDiv.parentNode
-                            if(state){
-                              parentDiv.style.width = 'calc(100vw - 82px)';
-                            }else{
-                              parentDiv.style.width = 'calc(100vw - 274px)';
+                window.setTimeout(()=>{
+                    getAllSys()
+                        .filter(item => item !== 'view-navbar')
+                        .forEach(node => {
+                            let sysDiv = document.getElementById(node)
+                            if (sysDiv != null) {
+                                let parentDiv = sysDiv.parentNode
+                                if(state){
+                                    parentDiv.style.width = 'calc(100vw - 82px)';
+                                }else{
+                                    parentDiv.style.width = 'calc(100vw - 274px)';
+                                }
                             }
-                        }
-                    })
+                        })
+                },200)
+
                 this.$emit('on-coll-change', state)
             }
         }
