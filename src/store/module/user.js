@@ -97,6 +97,9 @@ export default {
         logout(state.token).then(() => {
           commit('setToken', '')
           commit('setAccess', [])
+          sessionStorage.removeItem("navbar-routers")
+          sessionStorage.removeItem("token")
+          sessionStorage.removeItem("userId")
           resolve()
         }).catch(err => {
           reject(err)

@@ -110,7 +110,9 @@
                             })
                             sessionStorage.setItem("navbar-routers", JSON.stringify(converMenus))
                             router.addRoutes(addRouters)
-                            routers.push(...addRouters)
+                            routers.push(...(addRouters.filter(item => {
+                                return routers.indexOf(item) < 0
+                            })))
                             // 获取用户基本信息
                             this.getUserInfo({
                                 userCode: userName
