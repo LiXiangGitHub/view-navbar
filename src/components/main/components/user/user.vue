@@ -36,9 +36,10 @@ export default {
     ]),
     logout () {
       this.handleLogOut().then(() => {
-        this.$router.push({
+      /*  this.$router.push({
           name: 'login'
-        })
+        })*/
+        location.href='/'
       })
     },
     message () {

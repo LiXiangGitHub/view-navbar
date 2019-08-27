@@ -66,7 +66,7 @@
             return {
                 captchaUrl: '',
                 form: {
-                    userName: '910001',
+                    userName: '',
                     password: '',
                     captchaCode: '',
                     encodePassword: ''

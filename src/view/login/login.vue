@@ -141,6 +141,9 @@
                         setTimeout(msg, 3000);
                     })
             }
+        },
+        created() {
+
         }
     }
 </script>
