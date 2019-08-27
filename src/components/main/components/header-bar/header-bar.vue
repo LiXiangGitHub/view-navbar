@@ -27,6 +27,7 @@ export default {
   },
   methods: {
     handleCollpasedChange (state) {
+      alert(document.getElementById("single-spa-application"))
       this.$emit('on-coll-change', state)
     }
   }
