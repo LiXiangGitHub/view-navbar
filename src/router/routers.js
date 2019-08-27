@@ -158,25 +158,7 @@ export const appRouter = [
             title: '客户管理系统'
         },
         component: Main,
-        children: [
-            /*{
-                path: 'base',
-                name: 'base',
-                meta: {
-                    icon: 'md-funnel',
-                    title: '基础资料'
-                },
-                // component: () => import('@/view/multilevel/level-2-1.vue')
-            },
-            {
-                path: 'customer',
-                name: 'customer',
-                meta: {
-                    icon: 'md-funnel',
-                    title: '客户管理'
-                },
-            }*/
-        ]
+        children: []
     },
     {
         path: '/view-rps',
@@ -185,47 +167,14 @@ export const appRouter = [
             icon: 'md-menu',
             title: '报表管理系统',
         },
-        component: Main
-        /*  children: [
-              {
-                  path: 'table',
-                  name: 'table',
-                  meta: {
-                      icon: 'md-funnel',
-                      title: '表格管理'
-                  },
-                  // component: () => import('@/view/multilevel/level-2-1.vue')
-              },
-              {
-                  path: 'other',
-                  name: 'other',
-                  meta: {
-                      icon: 'md-funnel',
-                      title: '其他管理'
-                  },
-                  // component: () => import('@/view/multilevel/level-2-3.vue')
-              }
-          ]*/
+        component: Main,
+          children: []
     }
 ];
-
-let converMenus = sessionStorage.getItem('navbar-routers')
-let addRouters = []
-if (converMenus != null && converMenus != '') {
-    converMenus = JSON.parse(converMenus);
-    appRouter.forEach(item => {
-        item.children = converMenus.filter(m => item.name === m.sysCode)
-        if (item.children != null && item.children.length>0)
-            addRouters.push(item)
-        return item;
-    })
-
-}
 // 所有上面定义的路由都要写在下面的routers里
 export const routers = [
     loginRouter,
     otherRouter,
-    ...addRouters,
     page500,
     page401,
     page404

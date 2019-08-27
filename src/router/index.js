@@ -1,5 +1,5 @@
 import Router from 'vue-router'
-import {routers} from './routers';
+import {appRouter,addRouters, routers} from './routers';
 import store from '@/store'
 import iView from 'iview'
 import {setToken, getToken, canTurnTo, setTitle, getUserId} from '@/libs/util'
@@ -11,6 +11,17 @@ const {homeName} = config
 //登录页面定义
 const LOGIN_PAGE_NAME = 'login'
 
+//防止页面刷新时菜单丢失,出现404问题
+let converMenus = sessionStorage.getItem('navbar-routers')
+if (converMenus != null && converMenus != '') {
+    converMenus = JSON.parse(converMenus);
+    appRouter.forEach(item => {
+        item.children = converMenus.filter(m => item.name === m.sysCode)
+        if (item.children != null && item.children.length>0)
+            routers.push(item)
+    })
+}
+//路由信息
 const router = new Router({
     routes: routers,
     base: process.env.BASE_URL,
