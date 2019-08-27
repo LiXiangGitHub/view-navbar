@@ -28,7 +28,6 @@
         },
         methods: {
             handleCollpasedChange(state) {
-                window.setTimeout(()=>{
                     getAllSys()
                         .filter(item => item !== 'view-navbar')
                         .forEach(node => {
@@ -42,8 +41,6 @@
                                 }
                             }
                         })
-                },200)
-
                 this.$emit('on-coll-change', state)
             }
         }
