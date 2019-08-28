@@ -90,7 +90,6 @@
                         this.form.password = res.data.data
                         this.$emit('on-success-valid', this.form)
                       })
-
                     }
                 })
             },

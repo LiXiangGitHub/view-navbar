@@ -47,9 +47,10 @@ router.beforeEach((to, from, next) => {
     const token = getToken()
     if (!token && to.name !== LOGIN_PAGE_NAME) {
         // 未登录且要跳转的页面不是登录页
-        next({
+       /* next({
             name: LOGIN_PAGE_NAME // 跳转到登录页
-        })
+        })*/
+        location.href='/login'
     } else if (!token && to.name === LOGIN_PAGE_NAME) {
         // 未登陆且要跳转的页面是登录页
         next() // 跳转
@@ -70,9 +71,10 @@ router.beforeEach((to, from, next) => {
             }).catch(() => {
                 setToken('')
                 console.log('catch')
-                next({
+                /*next({
                     name: 'login'
-                })
+                })*/
+                location.href='/'
             })
         }
     }

@@ -100,6 +100,8 @@ export default {
           sessionStorage.removeItem("navbar-routers")
           sessionStorage.removeItem("token")
           sessionStorage.removeItem("userId")
+          sessionStorage.removeItem("navbar-buttons")
+          sessionStorage.removeItem("navbar-menus")
           resolve()
         }).catch(err => {
           reject(err)

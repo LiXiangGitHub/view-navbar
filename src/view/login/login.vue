@@ -102,6 +102,7 @@
                         }).then(res => {
                             let menus = res.data.data.menus
                             sessionStorage.setItem("navbar-buttons", JSON.stringify(res.data.data.buttons))
+                            sessionStorage.setItem("navbar-menus", JSON.stringify(menus))
 
                             let converMenus = convert(menus == null ? [] : menus)
                             let addRouters = []
@@ -142,7 +143,10 @@
                         });
                         setTimeout(msg, 3000);
                     })
-            }
+            },
+
+
+
         },
         created() {
 
