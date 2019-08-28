@@ -98,9 +98,11 @@
                         // 加载菜单
                         queryMenu({
                             userCode: userName,
-                            sysCode: process.env.VUE_APP_SYSCODES
+                            sysCode: window.getAllSys().join(',').replace(/view-/g, '')
                         }).then(res => {
                             let menus = res.data.data.menus
+                            sessionStorage.setItem("navbar-buttons", JSON.stringify(res.data.data.buttons))
+
                             let converMenus = convert(menus == null ? [] : menus)
                             let addRouters = []
                             appRouter.forEach(item => {
