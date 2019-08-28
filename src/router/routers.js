@@ -94,7 +94,7 @@ export const appRouter = [
         path: '/view-tms',
         name: 'tms',
         meta: {
-            icon: 'md-menu',
+            icon: 'md-jet',
             title: '运输管理系统'
         },
         component: Main,
@@ -104,7 +104,7 @@ export const appRouter = [
         path: '/view-bms',
         name: 'bms',
         meta: {
-            icon: 'md-menu',
+            icon: 'logo-yen',
             title: '财务管理系统'
         },
         component: Main,
@@ -114,7 +114,7 @@ export const appRouter = [
         path: '/view-qms',
         name: 'qms',
         meta: {
-            icon: 'md-menu',
+            icon: 'md-nuclear',
             title: '质量管理系统'
         },
         component: Main,
@@ -124,7 +124,7 @@ export const appRouter = [
         path: '/view-tcp',
         name: 'tcp',
         meta: {
-            icon: 'md-menu',
+            icon: 'ios-car',
             title: '运力管理系统'
         },
         component: Main,
@@ -134,7 +134,7 @@ export const appRouter = [
         path: '/view-pay',
         name: 'pay',
         meta: {
-            icon: 'md-menu',
+            icon: 'md-card',
             title: '支付管理系统'
         },
         component: Main,
@@ -144,7 +144,7 @@ export const appRouter = [
         path: '/view-mpp',
         name: 'mpp',
         meta: {
-            icon: 'md-menu',
+            icon: 'md-cart',
             title: '定价管理系统'
         },
         component: Main,
@@ -154,7 +154,7 @@ export const appRouter = [
         path: '/view-crm',
         name: 'crm',
         meta: {
-            icon: 'md-menu',
+            icon: 'md-contacts',
             title: '客户管理系统'
         },
         component: Main,
@@ -164,7 +164,7 @@ export const appRouter = [
         path: '/view-rps',
         name: 'rps',
         meta: {
-            icon: 'md-menu',
+            icon: 'md-pie',
             title: '报表管理系统',
         },
         component: Main,
