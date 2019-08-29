@@ -41,7 +41,7 @@
                 type: Array,
                 default: () => {
                     return [
-                        {required: true, message: '账号不能为空', trigger: 'blur'}
+                        {required: true, message: '用户名不能为空', trigger: 'blur'}
                     ]
                 }
             },
@@ -77,8 +77,8 @@
             rules() {
                 return {
                     userName: this.userNameRules,
-                    password: this.encodePassword,
-                    captchaCode: this.captchaCode
+                    password: this.passwordRules,
+                    captchaCode: this.captchaCodeRules
                 }
             }
         },
