@@ -5,7 +5,7 @@ import router from './router';
 import store from './store'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css';
-import i18n from '@/locale'
+// import i18n from '@/locale'
 import config from '@/config'
 import singleSpaVue from 'single-spa-vue';
 /**
@@ -47,7 +47,7 @@ const vueLifecycles = singleSpaVue({
   Vue,
   appOptions: {
       router,
-      i18n,
+      // i18n,
       store,
       render: (h) => h(App)
   },
