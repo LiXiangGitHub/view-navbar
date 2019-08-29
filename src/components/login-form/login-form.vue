@@ -1,7 +1,7 @@
 <template>
     <Form ref="loginForm" :model="form" :rules="rules" @keydown.enter.native="handleSubmit">
         <FormItem prop="userName">
-            <Input v-model="form.userName" placeholder="请输入用户名">
+            <Input  v-model="form.userName" placeholder="请输入用户名">
         <span slot="prepend">
           <Icon :size="16" type="ios-person"></Icon>
         </span>
@@ -16,14 +16,15 @@
         </FormItem>
 
         <FormItem prop="captchaCode" v-if="captchaUrl!=='' && captchaUrl!==undefined">
-            <Input type="text" v-model="form.captchaCode" placeholder="请输入验证码" style="width: 220px;float: left">
+            <div style="display: flex">
+                <Input type="text" v-model="form.captchaCode" placeholder="请输入验证码" style="width: 220px;">
                                 <span slot="prepend">
                                     <Icon :size="16" type="ios-umbrella"></Icon>
                                 </span>
-            </Input>
-            <div style="float: right;margin-left: 10px;">
-                <img :src="captchaUrl" v-on:click="changeCaptcha">
+                </Input>
+                <img style="margin-left: 18px;" :src="captchaUrl" v-on:click="changeCaptcha">
             </div>
+
         </FormItem>
 
         <FormItem>
@@ -102,3 +103,8 @@
         }
     }
 </script>
+<style>
+    .form-con .ivu-input{
+        height: 40px;
+    }
+</style>
