@@ -7,7 +7,7 @@
         </span>
             </Input>
         </FormItem>
-        <FormItem prop="password">
+        <FormItem prop="encodePassword">
             <Input type="password" v-model="form.encodePassword" placeholder="请输入密码">
         <span slot="prepend">
           <Icon :size="14" type="md-lock"></Icon>
@@ -77,7 +77,7 @@
             rules() {
                 return {
                     userName: this.userNameRules,
-                    password: this.passwordRules,
+                    encodePassword: this.passwordRules,
                     captchaCode: this.captchaCodeRules
                 }
             }
