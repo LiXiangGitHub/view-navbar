@@ -18,7 +18,7 @@
 <script>
     import LoginForm from '_c/login-form'
     import {Message} from 'iview';
-    import {queryMenu} from '@/api/user'
+    import {queryMenu, orgQuery} from '@/api/user'
     import {appRouter} from '@/router/routers';
     import router from '@/router';
     import {mapActions} from 'vuex'
@@ -120,9 +120,15 @@
                             this.getUserInfo({
                                 userCode: userName
                             }).then(res => {
-                                this.$router.push({
-                                    name: this.$config.homeName
+                                // 获取用户部门
+                                orgQuery(res.userOrg).then(orgres => {
+                                    sessionStorage.setItem("orgName", orgres.data.data[0].orgName)
+
+                                    this.$router.push({
+                                        name: this.$config.homeName
+                                    })
                                 })
+
                             })
 
                         })
@@ -144,7 +150,6 @@
                         setTimeout(msg, 3000);
                     })
             },
-
 
 
         },

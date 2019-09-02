@@ -17,14 +17,14 @@ if (converMenus != null && converMenus != '') {
     converMenus = JSON.parse(converMenus);
     appRouter.forEach(item => {
         item.children = converMenus.filter(m => item.name === m.sysCode)
-        if (item.children != null && item.children.length>0)
+        if (item.children != null && item.children.length > 0)
             routers.push(item)
     })
 }
 //路由信息
 const router = new Router({
     routes: routers,
-    base: process.env.BASE_URL,
+    base: 'webcloud',
     mode: 'history'
 })
 /**
@@ -47,10 +47,13 @@ router.beforeEach((to, from, next) => {
     const token = getToken()
     if (!token && to.name !== LOGIN_PAGE_NAME) {
         // 未登录且要跳转的页面不是登录页
-       /* next({
-            name: LOGIN_PAGE_NAME // 跳转到登录页
-        })*/
-        location.href='/login'
+        /* next({
+             name: LOGIN_PAGE_NAME // 跳转到登录页
+         })*/
+        console.log('to', to.name, LOGIN_PAGE_NAME, process.env.NODE_ENV === 'development' ?
+            '/login' : '/webcloud/login')
+        location.href = process.env.NODE_ENV === 'development' ?
+            '/login' : '/webcloud/login'
     } else if (!token && to.name === LOGIN_PAGE_NAME) {
         // 未登陆且要跳转的页面是登录页
         next() // 跳转
@@ -74,7 +77,8 @@ router.beforeEach((to, from, next) => {
                 /*next({
                     name: 'login'
                 })*/
-                location.href='/'
+                location.href = process.env.NODE_ENV === 'development' ?
+                    '/' : '/webcloud'
             })
         }
     }

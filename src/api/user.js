@@ -109,3 +109,13 @@ export const restoreTrash = msg_id => {
         }
     })
 }
+
+export const orgQuery = orgCode =>{
+    return axios.request({
+        url: 'org/queryPage',
+        method: 'post',
+        data: {
+            orgCode
+        }
+    })
+}

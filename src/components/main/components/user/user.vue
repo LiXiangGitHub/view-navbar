@@ -39,7 +39,8 @@ export default {
       /*  this.$router.push({
           name: 'login'
         })*/
-        location.href='/'
+        location.href=process.env.NODE_ENV === 'development' ?
+                '/' : '/webcloud'
       })
     },
     message () {
