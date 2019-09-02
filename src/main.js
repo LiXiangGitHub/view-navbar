@@ -26,12 +26,14 @@ Vue.prototype.$config = config
 Vue.use(iView);
 
 const node_env=process.env.NODE_ENV
+console.log('node_env',node_env)
 //验证码路径 为'' 或者 undefined 将不启用验证码功能
 Vue.prototype.$captchaUrl =  node_env === 'development'
     ? 'http://localhost:8100/portal/user/captcha/create'
     : node_env === 'production'
         ? 'http://mps-ht.chunghwa56.com/portal/user/captcha/create'
         : 'http://192.168.1.251:8150/portal/user/captcha/create';
+        //: 'http://192.168.1.31:8100/portal/user/captcha/create';
 
 //文件服务器ip地址
 Vue.prototype.$fmsHost= node_env === 'development'

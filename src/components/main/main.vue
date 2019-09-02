@@ -22,8 +22,17 @@
                     <!--
                               <fullscreen v-model="isFullscreen" style="margin-right: 10px;"/>
                     -->
-                  <span><Tag color="success" style="margin-right: 1vw;">{{$store.state.user.userName}}</Tag></span>
-                  <span><Tag color="success" style="margin-right: 2vw;">{{orgName}}</Tag></span>
+                    <span>
+                        <Tag color="success" style="margin-right: 2vw;">当前部门: {{orgName}}</Tag>
+                    </span>
+                    <span>
+                        <Tag color="success" style="margin-right: 1vw;">
+                            <Icon type="md-happy" style="font-size: 18px" />
+                        </Tag>
+                    </span>
+                    <span>
+                         <Tag color="success" style="margin-right: 1vw;">您好: {{$store.state.user.userName}}</Tag>
+                    </span>
                 </header-bar>
             </Header>
             <Content class="main-content-con">

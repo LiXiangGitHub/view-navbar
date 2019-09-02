@@ -20,6 +20,7 @@ export default {
     dev: 'http://localhost:8100/portal',
     pro: 'http://mps-ht.chunghwa56.com/portal',
     test: 'http://192.168.1.251:8150/portal'
+    //test: 'http://192.168.1.31:8100/portal',
   },
   /**
    * @description 默认打开的首页的路由name值，默认为home
