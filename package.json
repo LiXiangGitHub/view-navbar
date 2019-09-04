@@ -4,7 +4,7 @@
   "author": "lixiang<1321058199@qq.com>",
   "private": true,
   "scripts": {
-    "dev": "vue-cli-service serve --port 8080",
+    "serve": "vue-cli-service serve --port 8080",
     "build:pro": "vue-cli-service build",
     "build:test": "vue-cli-service build --mode test",
     "lint": "vue-cli-service lint",
