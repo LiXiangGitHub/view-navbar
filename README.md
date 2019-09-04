@@ -7,17 +7,17 @@ npm install
 
 ### 编译和热重载用于开发
 ```
-npm run dev
+npm run serve
 ```
 
 ### 编译和压缩用于生产
 ```
-npm run build
+npm run build:pro
 ```
 
-### 运行测试
+### 编译和压缩用于测试
 ```
-npm run test
+npm run build:test
 ```
 
 ### Lints和修复文件
