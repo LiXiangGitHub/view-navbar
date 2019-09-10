@@ -27,7 +27,7 @@
                     </span>
                     <span>
                         <Tag color="success" style="margin-right: 1vw;">
-                            <Icon type="md-happy" style="font-size: 18px" />
+                            <Icon type="md-swap" style="font-size: 18px" />
                         </Tag>
                     </span>
                     <span>
