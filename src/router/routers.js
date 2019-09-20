@@ -91,6 +91,16 @@ export const page404 = {
 //动态添加路由信息
 export const appRouter = [
     {
+        path: '/view-admin',
+        name: 'admin',
+        meta: {
+            icon: 'md-jet',
+            title: '资源管理系统'
+        },
+        component: Main,
+        children: []
+    },
+    {
         path: '/view-tms',
         name: 'tms',
         meta: {
