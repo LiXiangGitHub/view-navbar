@@ -118,7 +118,8 @@ export default {
         try {
           getUserInfo(data).then(res => {
             const data = res.data
-            const info=data.data[0]
+            // const info=data.data[0]
+              const info=data.data.sysAuthUserQueryVoList[0]
             info.access=[info.userCode]
             let host=vue.prototype.$fmsHost;
             let vaurl = `/fsm/api/fsm_api/preview.do?file_app_id=${info.userHead.split("_")[0]}&file_serial_no=${info.userHead}`;
