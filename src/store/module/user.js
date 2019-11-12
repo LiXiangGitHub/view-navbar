@@ -122,7 +122,10 @@ export default {
               const info=data.data.sysAuthUserQueryVoList[0]
             info.access=[info.userCode]
             let host=vue.prototype.$fmsHost;
-            let vaurl = `/fsm/api/fsm_api/preview.do?file_app_id=${info.userHead.split("_")[0]}&file_serial_no=${info.userHead}`;
+            let vaurl = '';
+            if(info.userHead){
+                vaurl = `/fsm/api/fsm_api/preview.do?file_app_id=${info.userHead.split("_")[0]}&file_serial_no=${info.userHead}`;
+            }
             let headUrl = host + vaurl;
             commit('setAvator', headUrl)
             commit('setUserName', info.userName)
