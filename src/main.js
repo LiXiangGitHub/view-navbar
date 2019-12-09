@@ -3,8 +3,10 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store'
-import iView from 'iview'
-import 'iview/dist/styles/iview.css';
+// import iView from 'iview'
+import iView from 'view-design';
+// import 'iview/dist/styles/iview.css';
+import 'view-design/dist/styles/iview.css';
 // import i18n from '@/locale'
 import config from '@/config'
 import singleSpaVue from 'single-spa-vue';
