@@ -34,7 +34,7 @@
 </template>
 <script>
     import {trans} from '@/api/user'
-
+    import {Message} from 'iview';
     export default {
         name: 'LoginForm',
         props: {
@@ -88,8 +88,16 @@
                 this.$refs.loginForm.validate((valid) => {
                     if (valid) {
                       trans(this.form).then(res => {
-                        this.form.password = res.data.data
-                        this.$emit('on-success-valid', this.form)
+                          if(res.data.code==200){
+                              this.form.password = res.data.data
+                              this.$emit('on-success-valid', this.form)
+                          }else {
+                              const msg = Message.error({
+                                  content: res.data.msg,
+                                  duration: 0
+                              });
+                              setTimeout(msg, 3000);
+                          }
                       })
                     }
                 })
