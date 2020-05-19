@@ -94,67 +94,47 @@
             ]),
             handleSubmit({userName, password, captchaCode}) {
                 this.handleLogin({userName, password, captchaCode}).then(res => {
-                    if (res.data.access_token != '') {
-                        // 加载菜单
-                        queryMenu({
-                            userCode: userName,
-                            sysCode: window.getAllSys().join(',').replace(/view-/g, '')
-                        }).then(res => {
-                            let menus = res.data.data.menus
-                            sessionStorage.setItem("navbar-buttons", JSON.stringify(res.data.data.buttons))
-                            sessionStorage.setItem("navbar-menus", JSON.stringify(menus))
-
-                            let converMenus = convert(menus == null ? [] : menus)
-                            let addRouters = []
-                            appRouter.forEach(item => {
-                                item.children = converMenus.filter(m => item.name === m.sysCode)
-                                if (item.children != null && item.children.length > 0)
-                                    addRouters.push(item)
-                            })
-                            sessionStorage.setItem("navbar-routers", JSON.stringify(converMenus))
-                            router.addRoutes(addRouters)
-                            routers.push(...(addRouters.filter(item => {
-                                return routers.indexOf(item) < 0
-                            })))
-                            // 获取用户基本信息
-                            this.getUserInfo({
-                                userCode: userName
-                            }).then(res => {
-                                // 获取用户部门
-                                orgQuery(res.userOrg).then(orgres => {
-                                    sessionStorage.setItem("orgName", orgres.data.data[0].orgName)
-
-                                    this.$router.push({
-                                        name: this.$config.homeName
-                                    })
-                                })
-
-                            })
-
+                    // 加载菜单
+                    queryMenu({
+                        userCode: userName,
+                        sysCode: window.getAllSys().join(',').replace(/view-/g, '')
+                    }).then(res => {
+                        let menus = res.data.data.menus
+                        sessionStorage.setItem("navbar-buttons", JSON.stringify(res.data.data.buttons))
+                        sessionStorage.setItem("navbar-menus", JSON.stringify(menus))
+                        let converMenus = convert(menus == null ? [] : menus)
+                        let addRouters = []
+                        appRouter.forEach(item => {
+                            item.children = converMenus.filter(m => item.name === m.sysCode)
+                            if (item.children != null && item.children.length > 0)
+                                addRouters.push(item)
                         })
-
-
-                    } else {
-                        const msg = Message.error({
-                            content: '用户名和密码错误！',
-                            duration: 0
-                        });
-                        setTimeout(msg, 3000);
-                    }
-                })
-                    .catch(error => {
-                        const msg = Message.error({
-                            content: error.response.data.message,
-                            duration: 0
-                        });
-                        setTimeout(msg, 3000);
+                        sessionStorage.setItem("navbar-routers", JSON.stringify(converMenus))
+                        router.addRoutes(addRouters)
+                        routers.push(...(addRouters.filter(item => {
+                            return routers.indexOf(item) < 0
+                        })))
+                        // 获取用户基本信息
+                        this.getUserInfo({
+                            userCode: userName
+                        }).then(res => {
+                            // 获取用户部门
+                            orgQuery(res.userOrg).then(orgres => {
+                                sessionStorage.setItem("orgName", orgres.data.data[0].orgName)
+                                this.$router.push({
+                                    name: this.$config.homeName
+                                })
+                            })
+                        })
                     })
-            },
-
-
-        },
-        created() {
-
+                }).catch(error => {
+                    const msg = Message.error({
+                        content: error.response.data.error_description==null?error.response.data.message:error.response.data.error_description,
+                        duration: 0
+                    });
+                    setTimeout(msg, 3000);
+                })
+            }
         }
     }
 </script>
