@@ -19,69 +19,11 @@
     import LoginForm from '_c/login-form'
     import {Message} from 'iview';
     import {queryMenu, orgQuery} from '@/api/user'
-    import {appRouter} from '@/router/routers';
     import router from '@/router';
     import {mapActions} from 'vuex'
     import {routers} from '@/router/routers'
-
-    /**
-     * 构建树形数据
-     * @param rows
-     * @returns {Array}
-     */
-    function convert(rows) {
-        function exists(rows, resParCode) {
-            for (var i = 0; i < rows.length; i++) {
-                if (rows[i].resCode == resParCode) return true;
-            }
-            return false;
-        }
-
-        function copyRoute(row) {
-            return {
-                resParCode: row.resParCode,
-                resParName: row.resParName,
-                resCode: row.resCode,
-                name: row.resCode,
-                meta: {
-                    title: row.resName,
-                    icon: row.resIcon
-                },
-                path: row.resUrl,
-                sysCode: row.sysCode
-                // component: row.resUrl,
-            }
-        }
-
-        var nodes = [];
-        // get the top level nodes
-        for (var i = 0; i < rows.length; i++) {
-            var row = rows[i];
-            if (!exists(rows, row.resParCode)) {
-                nodes.push(copyRoute(row));
-            }
-        }
-        var toDo = [];
-        for (var i = 0; i < nodes.length; i++) {
-            toDo.push(nodes[i]);
-        }
-        while (toDo.length) {
-            var node = toDo.shift();
-            for (var i = 0; i < rows.length; i++) {
-                var row = rows[i];
-                if (row.resParCode == node.resCode) {
-                    var child = copyRoute(row)
-                    if (node.children) {
-                        node.children.push(child);
-                    } else {
-                        node.children = [child];
-                    }
-                    toDo.push(child);
-                }
-            }
-        }
-        return nodes;
-    }
+    import { convert } from '@/libs/util'
+    import Main from '@/components/main'
 
     export default {
         components: {
@@ -99,21 +41,33 @@
                         userCode: userName,
                         sysCode: window.getAllSys().join(',').replace(/view-/g, '')
                     }).then(res => {
-                        let menus = res.data.data.menus
-                        sessionStorage.setItem("navbar-buttons", JSON.stringify(res.data.data.buttons))
-                        sessionStorage.setItem("navbar-menus", JSON.stringify(menus))
-                        let converMenus = convert(menus == null ? [] : menus)
-                        let addRouters = []
-                        appRouter.forEach(item => {
-                            item.children = converMenus.filter(m => item.name === m.sysCode)
-                            if (item.children != null && item.children.length > 0)
-                                addRouters.push(item)
-                        })
-                        sessionStorage.setItem("navbar-routers", JSON.stringify(converMenus))
+                        let menus = res.data.data.menus;
+                        let syss = res.data.data.syss;
+                        sessionStorage.setItem("navbar-buttons", JSON.stringify(res.data.data.buttons));
+                        sessionStorage.setItem("navbar-menus", JSON.stringify(menus));
+                        let converMenus = convert(menus == null ? [] : menus);
+                        let addRouters = [];
+                        syss.forEach(item => {
+                            let sys=
+                                {
+                                    path: '/view-'+item.sysCode,
+                                    name: item.sysCode,
+                                    meta: {
+                                        icon: item.sysIcon,
+                                        title: item.sysName
+                                    },
+                                    component: Main,
+                                    children: converMenus.filter(m => item.sysCode === m.resParCode)
+                                };
+                            addRouters.push(sys);
+
+                        });
+                        sessionStorage.setItem("navbar-syss", JSON.stringify(syss));
+                        sessionStorage.setItem("navbar-converMenus", JSON.stringify(converMenus));
                         router.addRoutes(addRouters)
                         routers.push(...(addRouters.filter(item => {
                             return routers.indexOf(item) < 0
-                        })))
+                        })));
                         // 获取用户基本信息
                         this.getUserInfo({
                             userCode: userName

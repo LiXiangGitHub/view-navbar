@@ -2,6 +2,7 @@ import Cookies from 'js-cookie'
 // cookie保存的天数
 import config from '@/config'
 import { forEach, hasOneOf, objEqual } from '@/libs/tools'
+
 const { title, cookieExpires, useI18n } = config
 
 export const TOKEN_KEY = 'token'
@@ -405,4 +406,75 @@ export const setTitle = (routeItem, vm) => {
   const pageTitle = showTitle(handledRoute, vm)
   const resTitle = pageTitle ? `${title} - ${pageTitle}` : title
   window.document.title = resTitle
+}
+
+/**
+ * 构建树形数据
+ * @param rows
+ * @returns {Array}
+ */
+export const convert = (rows) =>{
+    function exists(rows, resParCode) {
+        for (var i = 0; i < rows.length; i++) {
+            if (rows[i].resCode == resParCode) return true;
+        }
+        return false;
+    }
+
+    function copyRoute(row) {
+        var node = {
+            resParCode: row.resParCode,
+            resParName: row.resParName,
+            resCode: row.resCode,
+            name: row.resCode,
+            meta: {
+                title: row.resName,
+                icon: row.resIcon
+            },
+            path: row.resCode,
+            sysCode: row.sysCode
+        }
+        if(row.sysCode==="tms" || row.sysCode==="bms" || row.sysCode==="qms"  || row.sysCode==="tcp" || row.sysCode==="pay"   || row.sysCode==="mpp"  ){
+            if(row.resType==="menu"){
+                node.component = { template:
+                    '    <Card style="height: 100%"><router-view></router-view>\n'+
+                    '    </Card>'};
+            }
+            if(row.resType==="module"){
+                node.component = { template:
+                    '        <iframe src=\"'+row.resUrl+'\" width="100%" height="800px" frameborder="0" scrolling="no" ></iframe>\n'
+                };
+            }
+        }
+        return node;
+    }
+
+    var nodes = [];
+    // get the top level nodes
+    for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+        if (!exists(rows, row.resParCode)) {
+            nodes.push(copyRoute(row));
+        }
+    }
+    var toDo = [];
+    for (var i = 0; i < nodes.length; i++) {
+        toDo.push(nodes[i]);
+    }
+    while (toDo.length) {
+        var node = toDo.shift();
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows[i];
+            if (row.resParCode == node.resCode) {
+                var child = copyRoute(row)
+                if (node.children) {
+                    node.children.push(child);
+                } else {
+                    node.children = [child];
+                }
+                toDo.push(child);
+            }
+        }
+    }
+    return nodes;
 }

@@ -49,6 +49,17 @@ export const otherRouter = {
             },
             component: () => import('@/view/single-page/home')
         },
+        // {
+        //     path: '/view-tms/:module/:page',
+        //     name: 'iframe',
+        //     meta: {
+        //         hideInMenu: true,
+        //         title: 'XXX',
+        //         notCache: true,
+        //         icon: 'md-home'
+        //     },
+        //     component: () => import('@/view/iframe/iframe.vue')
+        // },
         {
             path: 'message_page',
             name: 'message_page',
@@ -88,99 +99,6 @@ export const page404 = {
     component: () => import('@/view/error-page/404.vue')
 };
 
-//动态添加路由信息
-export const appRouter = [
-    {
-        path: '/view-admin',
-        name: 'admin',
-        meta: {
-            icon: 'md-jet',
-            title: '资源管理系统'
-        },
-        component: Main,
-        children: []
-    },
-    {
-        path: '/view-tms',
-        name: 'tms',
-        meta: {
-            icon: 'md-jet',
-            title: '运输管理系统'
-        },
-        component: Main,
-        children: []
-    },
-    {
-        path: '/view-bms',
-        name: 'bms',
-        meta: {
-            icon: 'logo-yen',
-            title: '财务管理系统'
-        },
-        component: Main,
-        children: []
-    },
-    {
-        path: '/view-qms',
-        name: 'qms',
-        meta: {
-            icon: 'md-nuclear',
-            title: '质量管理系统'
-        },
-        component: Main,
-        children: []
-    },
-    {
-        path: '/view-tcp',
-        name: 'tcp',
-        meta: {
-            icon: 'ios-car',
-            title: '运力管理系统'
-        },
-        component: Main,
-        children: []
-    },
-    {
-        path: '/view-pay',
-        name: 'pay',
-        meta: {
-            icon: 'md-card',
-            title: '支付管理系统'
-        },
-        component: Main,
-        children: []
-    },
-    {
-        path: '/view-mpp',
-        name: 'mpp',
-        meta: {
-            icon: 'md-cart',
-            title: '定价管理系统'
-        },
-        component: Main,
-        children: []
-    },
-    {
-        path: '/view-crm',
-        name: 'crm',
-        meta: {
-            icon: 'md-contacts',
-            title: '客户管理系统'
-        },
-        component: Main,
-        children: []
-    },
-    {
-        path: '/view-rps',
-        name: 'rps',
-        meta: {
-            icon: 'md-pie',
-            title: '报表管理系统',
-        },
-        component: Main,
-          children: []
-    }
-];
 // 所有上面定义的路由都要写在下面的routers里
 export const routers = [
     loginRouter,
