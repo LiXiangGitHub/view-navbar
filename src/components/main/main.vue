@@ -23,7 +23,7 @@
                               <fullscreen v-model="isFullscreen" style="margin-right: 10px;"/>
                     -->
                     <span>
-                        <Tag color="success" style="margin-right: 2vw;">当前部门: {{orgName}}</Tag>
+                        <Tag color="success" style="margin-right: 2vw;">当前部门: {{$store.state.user.orgName}}</Tag>
                     </span>
                     <span>
                         <Tag color="success" style="margin-right: 1vw;">
@@ -84,8 +84,7 @@
                 collapsed: false,
                 minLogo,
                 maxLogo,
-                isFullscreen: false,
-                orgName: sessionStorage.getItem("orgName")
+                isFullscreen: false
             }
         },
         computed: {

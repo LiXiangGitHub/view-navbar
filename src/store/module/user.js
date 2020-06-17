@@ -15,6 +15,8 @@ export default {
   state: {
     userName: '',
     userId: '',
+    orgId:'',
+    orgName:'',
     avatorImgPath: '',
     token: getToken(),
     access: '',
@@ -35,6 +37,12 @@ export default {
     },
     setUserName (state, name) {
       state.userName = name
+    },
+    setOrgId (state, id) {
+          state.orgId = id
+    },
+    setOrgName (state, name) {
+          state.orgName = name
     },
     setAccess (state, access) {
       state.access = access
@@ -121,6 +129,7 @@ export default {
             const data = res.data
             // const info=data.data[0]
               const info=data.data.sysAuthUserQueryVoList[0]
+              const orgInfo=data.data.sysAuthOrg;
             info.access=[info.userCode]
             let host=vue.prototype.$fmsHost;
             let vaurl = '';
@@ -131,6 +140,8 @@ export default {
             commit('setAvator', headUrl)
             commit('setUserName', info.userName)
             commit('setUserId', info.userCode)
+            commit('setOrgName', orgInfo.orgName)
+            commit('setOrgId', orgInfo.orgCode)
             commit('setAccess', info.access)
             commit('setHasGetInfo', true)
             resolve(info)

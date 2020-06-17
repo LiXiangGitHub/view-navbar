@@ -72,13 +72,7 @@
                         this.getUserInfo({
                             userCode: userName
                         }).then(res => {
-                            // 获取用户部门
-                            orgQuery(res.userOrg).then(orgres => {
-                                sessionStorage.setItem("orgName", orgres.data.data[0].orgName)
-                                this.$router.push({
-                                    name: this.$config.homeName
-                                })
-                            })
+
                         })
                     })
                 }).catch(error => {
