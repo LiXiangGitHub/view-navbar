@@ -72,7 +72,15 @@
                         this.getUserInfo({
                             userCode: userName
                         }).then(res => {
-
+                            if(sessionStorage.getItem("userInfo")){
+                                sessionStorage.removeItem("userInfo");
+                                sessionStorage.setItem("userInfo",JSON.stringify(res))
+                            }else {
+                                sessionStorage.setItem("userInfo",JSON.stringify(res))
+                            }
+                            this.$router.push({
+                                name: this.$config.homeName
+                            })
                         })
                     })
                 }).catch(error => {

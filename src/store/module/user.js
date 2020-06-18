@@ -144,7 +144,8 @@ export default {
             commit('setOrgId', orgInfo.orgCode)
             commit('setAccess', info.access)
             commit('setHasGetInfo', true)
-            resolve(info)
+            var userInfo = {userId:info.userCode,userName:info.userName,orgId:orgInfo.orgCode,orgName:orgInfo.orgName};
+            resolve(userInfo)
           }).catch(err => {
             reject(err)
           })
