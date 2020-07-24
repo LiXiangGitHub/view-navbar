@@ -44,13 +44,11 @@ class HttpRequest {
             if (config.url === '/oauth/token' && config.method === 'post') {
                 config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
                 config.headers['Authorization'] = 'Basic d2ViQXBwOndlYkFwcA==';
+            } else if (config.url === '/oauth/token?access_token='+getToken() && config.method === 'delete') {
+                config.headers['Authorization'] = 'Basic d2ViQXBwOndlYkFwcA==';
+            }else if (config.url !== '/user/trans' && config.url !== '/user/login'  && config.url !== '/user/loginout' ) {
+                config.headers['Authorization'] = 'bearer '+getToken();
             }
-                else if (config.url === '/oauth/token?access_token='+getToken() && config.method === 'delete') {
-                  config.headers['Authorization'] = 'Basic d2ViQXBwOndlYkFwcA==';
-                }else if (config.url !== '/user/trans') {
-                  config.headers['Authorization'] = 'bearer '+getToken();
-                }
-
 
             // 添加全局的loading...
             if (!Object.keys(this.queue).length) {

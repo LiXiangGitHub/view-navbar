@@ -18,6 +18,8 @@
 
 <script>
     import './user.less'
+    import {chitu2userlogout} from '@/api/user'
+    import {setchitu2Token,setchitu2Org} from '@/libs/util'
     import {mapActions} from 'vuex'
 
     export default {
@@ -41,7 +43,16 @@
                     /*  this.$router.push({
                         name: 'login'
                       })*/
-                    location.href = '/login'
+                    //赤兔二代免登陆注销处理
+                    chitu2userlogout({}).then(res => {
+                        setchitu2Token('');
+                        setchitu2Org('');
+                        location.href = '/login'
+                        this.$Message.info({title: '提示信息', content: '赤兔二代免登陆注销处理成功!'});
+                    }).catch(error => {
+                        location.href = '/login'
+                        this.$Modal.error({title: '赤兔二代免登陆注销处理异常!', content: error.msg});
+                    });
                 })
             },
             message() {

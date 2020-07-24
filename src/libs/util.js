@@ -4,9 +4,9 @@ import config from '@/config'
 import { forEach, hasOneOf, objEqual } from '@/libs/tools'
 
 const { title, cookieExpires, useI18n } = config
-
 export const TOKEN_KEY = 'token'
-
+export const CHITU2TOKEN_KEY = 'cip_sso_token'
+export const CHITU2ORG_KEY = 'orgid'
 export const setToken = (token) => {
   Cookies.set(TOKEN_KEY, token, { expires: cookieExpires || 1 })
 }
@@ -15,6 +15,25 @@ export const getToken = () => {
   const token = Cookies.get(TOKEN_KEY)
   if (token) return token
   else return false
+}
+
+export const setchitu2Token = (token) => {
+    Cookies.set(CHITU2TOKEN_KEY, token, { expires: cookieExpires || 1 })
+}
+
+export const getchitu2Token = () => {
+    const token = Cookies.get(CHITU2TOKEN_KEY)
+    if (token) return token
+    else return false
+}
+export const setchitu2Org = (token) => {
+    Cookies.set(CHITU2ORG_KEY, token, { expires: cookieExpires || 1 })
+}
+
+export const getchitu2Org = () => {
+    const token = Cookies.get(CHITU2ORG_KEY)
+    if (token) return token
+    else return false
 }
 
 export const setUserId = (userId) => {
@@ -434,13 +453,13 @@ export const convert = (rows) =>{
             path: row.resCode,
             sysCode: row.sysCode
         }
-        if(row.sysCode==="tms" || row.sysCode==="bms" || row.sysCode==="qms"  || row.sysCode==="tcp" || row.sysCode==="pay"   || row.sysCode==="mpp"  ){
+        if(row.sysCode==="tms" || row.sysCode==="bms" || row.sysCode==="qms"  || row.sysCode==="tcp" || row.sysCode==="pay"   || row.sysCode==="mpp"){
             if(row.resType==="menu"){
                 node.component = { template:
                     '    <Card style="height: 100%"><router-view></router-view>\n'+
                     '    </Card>'};
             }
-            if(row.resType==="module"){
+            if(row.resType==="module" && row.resUrl.indexOf("http") != -1){
                 node.component = { template:
                     '        <iframe src=\"'+row.resUrl+'\" width="100%" height="800px" frameborder="0" scrolling="no" ></iframe>\n'
                 };

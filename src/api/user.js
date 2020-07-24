@@ -11,7 +11,22 @@ export const login = ({userName, password, captchaCode}) => {
         method: 'post'
     })
 }
+export const chitu2userlogin = (data) => {
 
+    return axios.request({
+        url: '/user/login',
+        data,
+        method: 'post'
+    })
+}
+export const chitu2userlogout = (data) => {
+
+    return axios.request({
+        url: '/user/loginout',
+        data,
+        method: 'post'
+    })
+}
 export const trans = (data) => {
     return axios.request({
         url: '/user/trans',
