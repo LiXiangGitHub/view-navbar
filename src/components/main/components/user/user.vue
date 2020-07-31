@@ -10,6 +10,9 @@
                     消息中心
                     <Badge style="margin-left: 10px" :count="messageUnreadCount"></Badge>
                 </DropdownItem>
+                <DropdownItem name="personal">
+                    个人中心
+                </DropdownItem>
                 <DropdownItem name="logout">退出登录</DropdownItem>
             </DropdownMenu>
         </Dropdown>
@@ -60,6 +63,11 @@
                     name: 'message_page'
                 })
             },
+            personal() {
+                this.$router.push({
+                    name: 'personal_page'
+                })
+            },
             handleClick(name) {
                 switch (name) {
                     case 'logout':
@@ -67,6 +75,9 @@
                         break
                     case 'message':
                         this.message()
+                        break
+                    case 'personal':
+                        this.personal()
                         break
                 }
             }

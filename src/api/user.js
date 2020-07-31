@@ -134,3 +134,29 @@ export const orgQuery = orgCode =>{
         }
     })
 }
+
+export const updatePassWord = (data) => {
+
+    return axios.request({
+        url: '/user/updatePassWord',
+        data,
+        method: 'post'
+    })
+}
+export const queryUser = (data) => {
+
+    return axios.request({
+        url: 'user/query',
+        data,
+        method: 'post'
+    })
+}
+export const updateHead = (data) => {
+
+    return axios.request({
+        url: '/user/updateHead',
+        data,
+        method: 'post'
+    })
+}
+

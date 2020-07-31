@@ -45,7 +45,7 @@
                         let menus = res.data.data.menus;
                         let syss = res.data.data.syss;
                         if (syss===null || syss.length===0){
-                            this.$Modal.error({title: '你没有任何权限,请联系管理员配置权限!', content: error.msg});
+                            this.$Modal.error({title: '登录提示!', content: '你没有任何权限,请联系管理员配置权限!'});
                         }
                         sessionStorage.setItem("navbar-buttons", JSON.stringify(res.data.data.buttons));
                         sessionStorage.setItem("navbar-menus", JSON.stringify(menus));

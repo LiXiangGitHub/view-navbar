@@ -2,7 +2,6 @@ import Cookies from 'js-cookie'
 // cookie保存的天数
 import config from '@/config'
 import { forEach, hasOneOf, objEqual } from '@/libs/tools'
-
 const { title, cookieExpires, useI18n } = config
 export const TOKEN_KEY = 'token'
 export const CHITU2TOKEN_KEY = 'cip_sso_token'
@@ -453,18 +452,6 @@ export const convert = (rows) =>{
             path: row.resCode,
             sysCode: row.sysCode
         }
-        if(row.sysCode==="tms" || row.sysCode==="bms" || row.sysCode==="qms"  || row.sysCode==="tcp" || row.sysCode==="pay"   || row.sysCode==="mpp"){
-            if(row.resType==="menu"){
-                node.component = { template:
-                    '    <Card style="height: 100%"><router-view></router-view>\n'+
-                    '    </Card>'};
-            }
-            if(row.resType==="module" && row.resUrl.indexOf("http") != -1){
-                node.component = { template:
-                    '        <iframe src=\"'+row.resUrl+'\" width="100%" height="800px" frameborder="0" scrolling="no" ></iframe>\n'
-                };
-            }
-        }
         return node;
     }
 
@@ -497,6 +484,7 @@ export const convert = (rows) =>{
     }
     return nodes;
 }
+
 /**
  * 深度拷贝，对相引用的对象，两个内存的开辟
  * @param obj

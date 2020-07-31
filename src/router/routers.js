@@ -68,6 +68,15 @@ export const otherRouter = {
                 title: '消息中心'
             },
             component: () => import('@/view/single-page/message/index.vue')
+        },
+        {
+            path: 'personal_page',
+            name: 'personal_page',
+            meta: {
+                icon: 'md-notifications',
+                title: '个人中心'
+            },
+            component: () => import('@/view/single-page/user/userInfo.vue')
         }
     ]
 };
