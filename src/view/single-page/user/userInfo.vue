@@ -53,29 +53,17 @@
                     <Row type="flex">
                         <i-col span="24">
                             <FormItem prop="originalPassword" label="原密码：">
-                                <i-input type="text" password  type="password" v-model="passWordDialogForm.originalPassword">
-                                    <span slot="prepend">
-                                        <Icon :size="16" type="md-unlock"></Icon>
-                                    </span>
-                                </i-input>
+                                <i-input type="password" icon="md-lock" v-model="passWordDialogForm.originalPassword"></i-input>
                             </FormItem>
                         </i-col>
                         <i-col span="24">
                             <FormItem prop="newPassword" label="新密码：">
-                                <i-input type="password" password  v-model="passWordDialogForm.newPassword">
-                                    <span slot="prepend">
-                                        <Icon :size="16" type="md-lock"></Icon>
-                                    </span>
-                                </i-input>
+                                <i-input type="password" password  v-model="passWordDialogForm.newPassword"></i-input>
                             </FormItem>
                         </i-col>
                         <i-col span="24">
                             <FormItem prop="affirmNewPassword" label="确认密码：">
-                                <i-input type="password" password  v-model="passWordDialogForm.affirmNewPassword">
-                                    <span slot="prepend">
-                                        <Icon :size="16" type="md-lock"></Icon>
-                                    </span>
-                                </i-input>
+                                <i-input type="password" password  v-model="passWordDialogForm.affirmNewPassword"></i-input>
                             </FormItem>
                         </i-col>
                     </Row>
