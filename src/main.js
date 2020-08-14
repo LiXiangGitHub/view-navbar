@@ -34,15 +34,18 @@ Vue.prototype.$captchaUrl =  node_env === 'development'
     ? 'http://localhost:8100/portal/user/captcha/create'
     : node_env === 'production'
         ? 'http://mps-ht.chunghwa56.com/portal/user/captcha/create'
-        : 'http://192.168.1.251:8150/portal/user/captcha/create';
+        // : 'http://192.168.1.251:8150/portal/user/captcha/create';
+        : 'http://chunghwa56.softether.net:8150/portal/user/captcha/create';
         //: 'http://192.168.1.31:8100/portal/user/captcha/create';
 
 //文件服务器ip地址
 Vue.prototype.$fmsHost= node_env === 'development'
-    ? 'http://192.168.1.236:8088'
+    // ? 'http://192.168.1.236:8088'
+    ? 'http://chunghwa56.softether.net:8089'
     :node_env === 'production'
         ? 'http://10.0.0.56:8088'
-        : 'http://192.168.1.236:8088';
+        // : 'http://192.168.1.236:8088';
+        : 'http://chunghwa56.softether.net:8089';
 
 /**
  * @description Single-SPA 应用注册
